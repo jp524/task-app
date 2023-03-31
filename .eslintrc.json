@@ -52,6 +52,7 @@
     ],
     "react/no-unescaped-entities": "off",
     "react/require-default-props": "error",
+    "react/prefer-stateless-function": [0, { "ignorePureComponents": false }],
     "sort-imports": [
       "error",
       {
