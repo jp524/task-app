@@ -7,31 +7,31 @@ class App extends Component {
     super();
 
     this.state = {
-      task: { text: '' },
-      tasks: [
-        { text: 'first task' },
-        { text: 'second task' },
-        { text: 'third task' },
-      ],
+      task: { text: '', id: 0 },
+      tasks: [],
+      numOfTasks: 0,
     };
   }
 
   onInputChange = (e) => {
+    const { numOfTasks } = this.state;
     const input = e.target.value;
     this.setState({
       task: {
         text: input,
+        id: numOfTasks,
       },
     });
   };
 
   onSubmitTask = (e) => {
-    const { task, tasks } = this.state;
+    const { task, tasks, numOfTasks } = this.state;
 
     e.preventDefault();
     this.setState({
       tasks: tasks.concat(task),
-      task: { text: '' },
+      task: { text: '', id: 0 },
+      numOfTasks: numOfTasks + 1,
     });
   };
 
