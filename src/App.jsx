@@ -7,6 +7,7 @@ class App extends Component {
 
     this.state = {
       task: { text: '' },
+      tasks: [],
     };
   }
 
@@ -17,21 +18,38 @@ class App extends Component {
         text: input,
       },
     });
-    console.log(this.state.task);
+  };
+
+  onSubmitTask = (e) => {
+    const { task, tasks } = this.state;
+
+    e.preventDefault();
+    this.setState({
+      tasks: tasks.concat(task),
+      task: { text: '' },
+    });
+    console.log(tasks);
   };
 
   render() {
-    const { task } = this.state;
+    const { task, tasks } = this.state;
 
     return (
       <div>
         <form>
           <label htmlFor="taskInput">
             Task
-            <input type="text" id="taskInput" onChange={this.onInputChange} />
+            <input
+              type="text"
+              id="taskInput"
+              value={task.text}
+              onChange={this.onInputChange}
+            />
           </label>
 
-          <button type="submit">Add</button>
+          <button type="submit" onClick={this.onSubmitTask}>
+            Add
+          </button>
         </form>
       </div>
     );
