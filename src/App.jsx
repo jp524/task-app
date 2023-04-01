@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Overview from './components/Overview';
 
 class App extends Component {
   constructor() {
@@ -7,7 +8,11 @@ class App extends Component {
 
     this.state = {
       task: { text: '' },
-      tasks: [],
+      tasks: [
+        { text: 'first task' },
+        { text: 'second task' },
+        { text: 'third task' },
+      ],
     };
   }
 
@@ -28,7 +33,6 @@ class App extends Component {
       tasks: tasks.concat(task),
       task: { text: '' },
     });
-    console.log(tasks);
   };
 
   render() {
@@ -51,6 +55,7 @@ class App extends Component {
             Add
           </button>
         </form>
+        <Overview tasks={tasks} />
       </div>
     );
   }
