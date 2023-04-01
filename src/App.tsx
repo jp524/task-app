@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import './App.css';
 import Overview from './components/Overview';
+import AppInterface from './interfaces/AppInterface';
 
-class App extends Component {
-  constructor() {
-    super();
+class App extends React.Component<{}, AppInterface> {
+  constructor(props: any) {
+    super(props);
 
     this.state = {
       task: { text: '', id: 0 },
@@ -13,7 +14,7 @@ class App extends Component {
     };
   }
 
-  onInputChange = (e) => {
+  onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { numOfTasks } = this.state;
     const input = e.target.value;
     this.setState({
@@ -24,7 +25,7 @@ class App extends Component {
     });
   };
 
-  onSubmitTask = (e) => {
+  onSubmitTask = (e: React.SyntheticEvent) => {
     const { task, tasks, numOfTasks } = this.state;
 
     e.preventDefault();
@@ -40,7 +41,7 @@ class App extends Component {
 
     return (
       <div>
-        <form>
+        <form onSubmit={this.onSubmitTask}>
           <label htmlFor="taskInput">
             Task
             <input
@@ -51,9 +52,7 @@ class App extends Component {
             />
           </label>
 
-          <button type="submit" onClick={this.onSubmitTask}>
-            Add
-          </button>
+          <input type="submit" value="Add" />
         </form>
         <Overview tasks={tasks} />
       </div>
