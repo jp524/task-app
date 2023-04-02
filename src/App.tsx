@@ -1,9 +1,16 @@
 import * as React from 'react';
 import './App.css';
 import Overview from './components/Overview';
-import AppInterface from './interfaces/AppInterface';
 
-class App extends React.Component<{}, AppInterface> {
+import TaskInterface from './interfaces/TaskInterface';
+
+interface State {
+  task: TaskInterface;
+  tasks: TaskInterface[];
+  numOfTasks: number;
+}
+
+class App extends React.Component<{}, State> {
   constructor(props: any) {
     super(props);
 
@@ -36,6 +43,15 @@ class App extends React.Component<{}, AppInterface> {
     });
   };
 
+  // Type of 'e' to be confirmed
+  onDeleteTask = (e) => {
+    const { tasks } = this.state;
+    const taskIndex = e.target.id;
+    this.setState({
+      tasks: tasks.filter((task) => task.id != taskIndex),
+    });
+  };
+
   render() {
     const { task, tasks } = this.state;
 
@@ -54,7 +70,7 @@ class App extends React.Component<{}, AppInterface> {
 
           <input type="submit" value="Add" />
         </form>
-        <Overview tasks={tasks} />
+        <Overview tasks={tasks} onDeleteBtn={this.onDeleteTask} />
       </div>
     );
   }
