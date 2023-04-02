@@ -11,11 +11,10 @@ class Overview extends React.Component<Props, {}> {
     const { tasks } = this.props;
 
     return (
-      <ul>
+      <ul className="tasks">
         {tasks.map((task) => {
           return (
-            <li key={task.id}>
-              {task.text}
+            <li key={task.id} className="task">
               <button
                 type="button"
                 key={task.id}
@@ -24,6 +23,7 @@ class Overview extends React.Component<Props, {}> {
               >
                 Delete
               </button>
+              {task.text}
             </li>
           );
         })}
